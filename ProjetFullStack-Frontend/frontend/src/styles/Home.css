@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    background: linear-gradient(91deg, #563111 21.28%, #BC6C25 71.07%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn-secondary {
+    background-color: #E9D4BD;
+    color: #BC6C25;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    .items {
+        display: none;
+        position: fixed;
+        top: 90px;
+        left: 0;
+        width: 100%;
+       
+        background: #E9D4BD;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .items.active {
+        display: flex;
+    }
+
+    .itemsdans {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 3.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        margin: 0.5rem 0;
+        padding: 0.5rem 1rem;
+    }
+
+    .charts {
+        padding: 1rem;
+        grid-template-columns: 1fr;
+    }
+
+    .menu-button {
+        display: block;
+    }
+}
+
