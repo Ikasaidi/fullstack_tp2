@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 
+const API_URL= import.meta.env.VITE_API_URL || ""
+
 function Market() {
 
     const { id } = useParams();
@@ -26,7 +28,7 @@ function Market() {
 
 
     const loadStock = async () => {
-        const result = await axios.get(`http://localhost:8585/stock/getAllStocks`);
+        const result = await axios.get(`${API_URL}/stock/getAllStocks`);
         console.log("Data received:", result.data)
         setStocks(...stocks, result.data);
     };

@@ -1,0 +1,61 @@
+services:
+  frontend:
+    image: ikaqueen/tp2-6250772-2380946-frontend:v2
+    build:
+      context: ./ProjetFullStack-Frontend/frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - sorciere-network
+ 
+  backend:
+    image: ikaqueen/tp2-6250772-2380946-backend:v2
+    container_name: Sorciere
+    build:
+      context: ./ProjetFullStack-Backend
+    #In case you just want to deploy the backend and access it
+    #without deploying the frontend, add a port mapping
+    ports:
+      - "8585:8585"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - sorciere-network
+    environment:
+      - SERVER_PORT=8585
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/assetra
+ 
+ 
+  mariadb:
+    image: mariadb
+    networks:
+      - sorciere-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_PASSWORD=1234
+      - MYSQL_DATABASE=assetra
+    volumes:
+      - db:/data/db
+      # ./mongo-seed folder contains a script to populate the database
+      # this script will be copied inside the container and will run
+      # when the container starts
+      - ./db-seed:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    
+ 
+volumes:
+  db:
+ 
+networks:
+  sorciere-network:
+    driver: bridge
